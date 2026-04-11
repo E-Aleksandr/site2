@@ -1,4 +1,5 @@
 FROM nginx:alpine
-RUN rm -rf /usr/share/nginx/html/*
-COPY Static /usr/share/nginx/html
+
+COPY Static/index.html /usr/share/nginx/html/index.html
+
 EXPOSE 8080

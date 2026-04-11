@@ -1,5 +1,9 @@
 FROM nginx:alpine
 
-COPY Static/index.html /usr/share/nginx/html/index.html
+# Удаляем дефолтные файлы
+RUN rm -rf /usr/share/nginx/html/*
+
+# Копируем из папки Static (с большой буквы)
+COPY Static /usr/share/nginx/html
 
 EXPOSE 8080

@@ -32,7 +32,9 @@
         }
         .points {
             color: #ffd700;
-            font-style: italic;
+            font-size: 15px;
+            font-weight: lighter;
+            margin-left: 20px;
         }
         html {
             scroll-behavior: smooth;
@@ -113,7 +115,8 @@
         <div class="question-card" id="question1">
             <div class="question-text">
                 1. Кто победит в первой встрече 1/4 финала?
-                <span class="points"> 2 балла</span>
+                <br>
+                <span class="points">Вопрос на 2 балла</span>
             </div>
             <div class="options">
                 <label class="option">
@@ -132,7 +135,8 @@
         <div class="question-card" id="question2">
             <div class="question-text">
                 2. Каким будет точный счёт в первом матче 1/4 финала?
-                <span class="points"> 6 баллов</span>
+                <br>
+                <span class="points">Вопрос на 6 баллов</span>
             </div>
             <div class="options">
                 <label class="option">
@@ -165,6 +169,7 @@
         <div class="question-card" id="question3">
             <div class="question-text">
                 3. Кто победит во второй встрече 1/4 финала?
+                <br>
                 <span class="points"> 2 балла</span>
             </div>
             <div class="options">
@@ -183,7 +188,8 @@
         <!-- Вопрос 4 -->
         <div class="question-card" id="question4">
             <div class="question-text">
-                4. Каким будет точный счёт в втором матче 1/4 финала?
+                4. Каким будет точный счёт во втором матче 1/4 финала?
+                <br>
                 <span class="points"> 6 баллов</span>
             </div>
             <div class="options">
@@ -216,7 +222,8 @@
         <!-- Вопрос 5 -->
         <div class="question-card" id="question5">
             <div class="question-text">
-                5. Кто победит во третьей встрече 1/4 финала?
+                5. Кто победит в третьей встрече 1/4 финала?
+                <br>
                 <span class="points"> 2 балла</span>
             </div>
             <div class="options">
@@ -236,6 +243,7 @@
         <div class="question-card" id="question6">
             <div class="question-text">
                 6. Каким будет точный счёт в третьей матче 1/4 финала?
+                <br>
                 <span class="points"> 6 баллов</span>
             </div>
             <div class="options">
@@ -268,7 +276,8 @@
         <!-- Вопрос 7 -->
         <div class="question-card" id="question7">
             <div class="question-text">
-                7. Кто победит во четвертой встрече 1/4 финала?
+                7. Кто победит в четвертой встрече 1/4 финала?
+                <br>
                 <span class="points"> 2 балла</span>
             </div>
             <div class="options">
@@ -288,6 +297,7 @@
         <div class="question-card" id="question8">
             <div class="question-text">
                 8. Каким будет точный счёт в четвертом матче 1/4 финала?
+                <br>
                 <span class="points"> 6 баллов</span>
             </div>
             <div class="options">
@@ -321,6 +331,7 @@
         <div class="question-card" id="question9">
             <div class="question-text">
                 9. Кто одержит победу в первом полуфинале?
+                <br>
                 <span class="points"> 4 баллов</span>
             </div>
             <div class="options">
@@ -350,6 +361,7 @@
         <div class="question-card" id="question10">
             <div class="question-text">
                 10. Кто одержит победу во втором полуфинале?
+                <br>
                 <span class="points"> 4 баллов</span>
             </div>
             <div class="options">
@@ -379,39 +391,31 @@
     </div>
     <script>
         function checkAnswers() {
-            // Массив с вопросами
             const questions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10'];
             let unanswered = [];
             
-            // Проверяем каждый вопрос
             questions.forEach((q, index) => {
                 const selected = document.querySelector(`input[name="${q}"]:checked`);
                 if (!selected) {
-                    unanswered.push(index + 1); // запоминаем номер вопроса
+                    unanswered.push(index + 1);
                 }
             });
             
-            // Если есть неотвеченные вопросы
             if (unanswered.length > 0) {
-                // Убираем подсветку со всех вопросов
                 document.querySelectorAll('.question-card').forEach(card => {
                     card.classList.remove('highlight');
                 });
                 
-                // Подсвечиваем первый неотвеченный вопрос
                 const firstUnanswered = document.getElementById(`question${unanswered[0]}`);
                 firstUnanswered.classList.add('highlight');
                 
-                // Плавно скроллим к нему
                 firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
-                // Через 3 секунды убираем подсветку
                 setTimeout(() => {
                     firstUnanswered.classList.remove('highlight');
                 }, 3000);
                 
             } else {
-                // Все вопросы отвечены - отправляем
                 errorMsg.style.display = 'none';
                 errorMsg.style.background = 'rgba(0, 255, 136, 0.2)';
                 errorMsg.style.borderColor = '#00ff88';
@@ -419,7 +423,6 @@
                 errorMsg.innerHTML = '✅ Все вопросы отвечены! Прогнозы отправлены!';
                 errorMsg.style.display = 'block';
                 
-                // Собираем ответы
                 const answers = {};
                 questions.forEach(q => {
                     const selected = document.querySelector(`input[name="${q}"]:checked`);
@@ -428,7 +431,6 @@
                 
                 console.log('Ответы пользователя:', answers);
                 
-                // Через 2 секунды скрываем сообщение
                 setTimeout(() => {
                     errorMsg.style.display = 'none';
                     errorMsg.style.background = 'rgba(255, 71, 87, 0.2)';
@@ -438,14 +440,10 @@
             }
         }
         
-        // Автоматически убираем подсветку, когда пользователь отвечает на вопрос
         document.querySelectorAll('input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                // Находим родительский вопрос
                 const questionCard = this.closest('.question-card');
-                // Убираем подсветку
                 questionCard.classList.remove('highlight');
-                // Скрываем сообщение об ошибке
                 document.getElementById('errorMessage').style.display = 'none';
             });
         });

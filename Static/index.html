@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>Прогнозы</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <style>
         label {
@@ -10,44 +10,18 @@
             display: flex;
             margin-bottom: 5px;
             align-items: center;
-            font-weight: bold;
             color:#b8c7d9;
         }
-        .error {
-            color: red;
-            font-size: 12px;
-        }
-        button {
-            background: linear-gradient(135deg, #00d4ff, #0099cc);
-            color: #ffffff;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-
-            background: linear-gradient(135deg, #00e5ff, #00aadd);
-            transform: scale(1.02);
-            cursor: pointer;
-
-            transform: scale(0.98);
+        input:checked ~ .label {
+            color: #00ff88;
+            font-weight: bold;
         }
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
-            font-weight: bold;
-            color:rgb(60, 117, 2);
+            margin: 0;
+            min-height: 100vh;
             background: linear-gradient(135deg, #0a0a2a, #003366, #0a0a2a);
-        }
-
-        .radio-group {
-            margin: 15px 0;
-        }
-        .radio-group label {
-            margin-right: 20px;
-            cursor: pointer;
-        }
-        input[type="radio"] {
-            margin-right: 5px;
-            cursor: pointer;
         }
         img {
             margin-right: 5px;
@@ -56,304 +30,425 @@
             height: 25px;
             object-fit: cover;
         }
+        .points {
+            color: #ffd700;
+            font-style: italic;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #00e5ff, #00aadd);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        }
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #00d4ff;
+        }
+        .option:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .question-text {
+            color: #e0f2fe;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .question-card.highlight {
+            border-color: #ff4757;
+            background: rgba(255, 71, 87, 0.1);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);
+        }
+        .question-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
-    <h2 style="color: #ffffff;">ПРОГНОЗЫ Test</h2>
-    <form id="surveyForm">
-            <!-- Вопрос 1 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">1. Кто победит в первой встрече 1/4 финала?</span>
-                <span style="color: #00ff88; font-style: italic;"> 2 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q1" value="v1"> 
-                        <img src="Sovietnatural.jpg">
-                        Sovietnatural
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q1" value="v2"> 
-                        <img src="Октаграмма.jpg">
-                        Октаграмма
-                    </label>
-                </div>
+    <div class="quiz-container">
+        <h1 style="color: #ffffff; text-align: center; margin-bottom: 30px;">ПРОГНОЗЫ Test</h1>
+        
+        <!-- Вопрос 1 -->
+        <div class="question-card" id="question1">
+            <div class="question-text">
+                1. Кто победит в первой встрече 1/4 финала?
+                <span class="points"> 2 балла</span>
             </div>
-            <hr>
-            <!-- Вопрос 2 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">2. Каким будет точный счёт в первом матче 1/4 финала?</span>
-                <span style="color: #00ff88; font-style: italic;"> 6 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q2" value="v1"> 3:0 в пользу "Sovietnatural"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q2" value="v2"> 3:1 в пользу "Sovietnatural"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q2" value="v3"> 3:2 в пользу "Sovietnatural"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q2" value="v4"> 0:3 в пользу "Октаграмма"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q2" value="v5"> 1:3 в пользу "Октаграмма"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q2" value="v6"> 2:3 в пользу "Октаграмма"
-                    </label>
-                </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q1" value="team1">
+                    <img src="Sovietnatural.jpg">
+                    <span class="label">Sovietnatural</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q1" value="team2">
+                    <img src="Октаграмма.jpg">
+                    <span class="label">Октаграмма</span>
+                </label>
             </div>
-            <hr>
-            <!-- Вопрос 3 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">3. Кто победит во второй встрече 1/4 финала?</span>
-                <span style="color: #00ff88; font-style: italic;"> 2 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q3" value="v1"> 
-                        <img src="ВБПГ.jpg">
-                        ВБПГ
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q3" value="v2"> 
-                        <img src="3umph.jpg">
-                        3umph
-                    </label>
-                </div>
+        </div>
+        <!-- Вопрос 2 -->
+        <div class="question-card" id="question2">
+            <div class="question-text">
+                2. Каким будет точный счёт в первом матче 1/4 финала?
+                <span class="points"> 6 баллов</span>
             </div>
-            <hr>
-            <!-- Вопрос 4 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">4. Каким будет точный счёт в втором матче 1/4 финала?</span>
-                <span style="color: #00ff88; font-style: italic;"> 6 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q4" value="v1"> 3:0 в пользу "ВБПГ"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q4" value="v2"> 3:1 в пользу "ВБПГ"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q4" value="v3"> 3:2 в пользу "ВБПГ"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q4" value="v4"> 0:3 в пользу "3umph"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q4" value="v5"> 1:3 в пользу "3umph"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q4" value="v6"> 2:3 в пользу "3umph"
-                    </label>
-                </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q2" value="team1">
+                    <span class="label">3:0 в пользу "Sovietnatural"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="team2">
+                    <span class="label">3:1 в пользу "Sovietnatural"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="team3">
+                    <span class="label">3:2 в пользу "Sovietnatural"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="team4">
+                    <span class="label">0:3 в пользу "Октаграмма"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="team5">
+                    <span class="label">1:3 в пользу "Октаграмма"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="team6">
+                    <span class="label">2:3 в пользу "Октаграмма"</span>
+                </label>
             </div>
-            <hr>
-            <!-- Вопрос 5 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">5. Кто победит во третьей встрече 1/4 финала?</span>
-                <span style="color: #00ff88; font-style: italic;"> 2 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q5" value="v1"> 
-                        <img src="1PunchPok783.jpg">
-                        1PunchPok783
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q5" value="v2"> 
-                        <img src="MLYARI.jpg">
-                        MLYARI
-                    </label>
-                </div>
+        </div>
+        <!-- Вопрос 3 -->
+        <div class="question-card" id="question3">
+            <div class="question-text">
+                3. Кто победит во второй встрече 1/4 финала?
+                <span class="points"> 2 балла</span>
             </div>
-            <hr>
-            <!-- Вопрос 6 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">6. Каким будет точный счёт в третьей матче 1/4 финала?</span>
-                <span style="color: #00ff88; font-style: italic;"> 6 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q6" value="v1" checked> 3:0 в пользу "1PunchPok783"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q6" value="v2"> 3:1 в пользу "1PunchPok783"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q6" value="v3"> 3:2 в пользу "1PunchPok783"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q6" value="v4"> 0:3 в пользу "MLYARI"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q6" value="v5"> 1:3 в пользу "MLYARI"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q6" value="v6"> 2:3 в пользу "MLYARI"
-                    </label>
-                </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q3" value="team1">
+                    <img src="ВБПГ.jpg">
+                    <span class="label">ВБПГ</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q3" value="team2">
+                    <img src="3umph.jpg">
+                    <span class="label">3umph</span>
+                </label>
             </div>
-            <hr>
-            <!-- Вопрос 7 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">7. Кто победит во четвертой встрече 1/4 финала?</span>
-                <span style="color: #00ff88; font-style: italic;"> 2 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q7" value="v1"> 
-                        <img src="Resistance.jpg">
-                        Resistance
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q7" value="v2"> 
-                        <img src="BA3UJlUHYCbl.jpg">
-                        BA3UJlUHYCbl
-                    </label>
-                </div>
+        </div>
+        <!-- Вопрос 4 -->
+        <div class="question-card" id="question4">
+            <div class="question-text">
+                4. Каким будет точный счёт в втором матче 1/4 финала?
+                <span class="points"> 6 баллов</span>
             </div>
-            <hr>
-            <!-- Вопрос 8 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">8. Каким будет точный счёт в четвертой матче 1/4 финала?</span>
-                <span style="color: #00ff88; font-style: italic;"> 6 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q8" value="v1"> 3:0 в пользу "Resistance"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q8" value="v2"> 3:1 в пользу "Resistance"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q8" value="v3"> 3:2 в пользу "Resistance"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q8" value="v4"> 0:3 в пользу "BA3UJlUHYCbl"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q8" value="v5"> 1:3 в пользу "BA3UJlUHYCbl"
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q8" value="v6"> 2:3 в пользу "BA3UJlUHYCbl"
-                    </label>
-                </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q4" value="team1">
+                    <span class="label">3:0 в пользу "ВБПГ"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="team2">
+                    <span class="label">3:1 в пользу "ВБПГ"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="team3">
+                    <span class="label">3:2 в пользу "ВБПГ"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="team4">
+                    <span class="label">0:3 в пользу "3umph"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="team5">
+                    <span class="label">1:3 в пользу "3umph"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="team6">
+                    <span class="label">2:3 в пользу "3umph"</span>
+                </label>
             </div>
-            <hr>
-            <!-- Вопрос 9 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">9. Кто одержит победу в первом полуфинале?</span>
-                <span style="color: #00ff88; font-style: italic;"> 4 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q9" value="v1"> 
-                        <img src="Sovietnatural.jpg">
-                        Sovietnatural
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q9" value="v2"> 
-                        <img src="Октаграмма.jpg">
-                        Октаграмма
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q9" value="v3"> 
-                        <img src="3umph.jpg">
-                        3umph
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q9" value="v4"> 
-                        <img src="ВБПГ.jpg">
-                        ВБПГ
-                    </label>
-                </div>
+        </div>
+        <!-- Вопрос 5 -->
+        <div class="question-card" id="question5">
+            <div class="question-text">
+                5. Кто победит во третьей встрече 1/4 финала?
+                <span class="points"> 2 балла</span>
             </div>
-            <hr>
-            <!-- Вопрос 10 -->
-            <div class="question">
-                <span style="color: #e0f2fe;">10. Кто одержит победу во втором полуфинале?</span>
-                <span style="color: #00ff88; font-style: italic;"> 4 баллов</span>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q10" value="v1"> 
-                        <img src="1PunchPok783.jpg">
-                        1PunchPok783
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q10" value="v2"> 
-                        <img src="MLYARI.jpg">
-                        MLYARI
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q10" value="v3"> 
-                        <img src="Resistance.jpg">
-                        Resistance
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label>
-                        <input type="radio" name="q10" value="v4"> 
-                        <img src="BA3UJlUHYCbl.jpg">
-                        BA3UJlUHYCbl
-                    </label>
-                </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q5" value="team1">
+                    <img src="1PunchPok783.jpg">
+                    <span class="label">1PunchPok783</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q5" value="team2">
+                    <img src="MLYARI.jpg">
+                    <span class="label">MLYARI</span>
+                </label>
             </div>
-            <br>
-            <button type="button" onclick="showResults()">Сохранить</button>
-    
+        </div>
+        <!-- Вопрос 6 -->
+        <div class="question-card" id="question6">
+            <div class="question-text">
+                6. Каким будет точный счёт в третьей матче 1/4 финала?
+                <span class="points"> 6 баллов</span>
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q6" value="team1">
+                    <span class="label">3:0 в пользу "1PunchPok783"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q6" value="team2">
+                    <span class="label">3:1 в пользу "1PunchPok783"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q6" value="team3">
+                    <span class="label">3:2 в пользу "1PunchPok783"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q6" value="team4">
+                    <span class="label">0:3 в пользу "MLYARI"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q6" value="team5">
+                    <span class="label">1:3 в пользу "MLYARI"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q6" value="team6">
+                    <span class="label">2:3 в пользу "MLYARI"</span>
+                </label>
+            </div>
+        </div>
+        <!-- Вопрос 7 -->
+        <div class="question-card" id="question7">
+            <div class="question-text">
+                7. Кто победит во четвертой встрече 1/4 финала?
+                <span class="points"> 2 балла</span>
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q7" value="team1">
+                    <img src="Resistance.jpg">
+                    <span class="label">Resistance</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q7" value="team2">
+                    <img src="BA3UJlUHYCbl.jpg">
+                    <span class="label">BA3UJlUHYCbl</span>
+                </label>
+            </div>
+        </div>
+        <!-- Вопрос 8 -->
+        <div class="question-card" id="question8">
+            <div class="question-text">
+                8. Каким будет точный счёт в четвертом матче 1/4 финала?
+                <span class="points"> 6 баллов</span>
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q8" value="team1">
+                    <span class="label">3:0 в пользу "Resistance"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q8" value="team2">
+                    <span class="label">3:1 в пользу "Resistance"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q8" value="team3">
+                    <span class="label">3:2 в пользу "Resistance"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q8" value="team4">
+                    <span class="label">0:3 в пользу "BA3UJlUHYCbl"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q8" value="team5">
+                    <span class="label">1:3 в пользу "BA3UJlUHYCbl"</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q8" value="team6">
+                    <span class="label">2:3 в пользу "BA3UJlUHYCbl"</span>
+                </label>
+            </div>
+        </div>
+        <!-- Вопрос 9 -->
+        <div class="question-card" id="question9">
+            <div class="question-text">
+                9. Кто одержит победу в первом полуфинале?
+                <span class="points"> 4 баллов</span>
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q9" value="team1">
+                    <img src="Sovietnatural.jpg">
+                    <span class="label">Sovietnatural</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q9" value="team2">
+                    <img src="Октаграмма.jpg">
+                    <span class="label">Октаграмма</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q9" value="team3">
+                    <img src="3umph.jpg">
+                    <span class="label">3umph</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q9" value="team4">
+                    <img src="ВБПГ.jpg">
+                    <span class="label">ВБПГ</span>
+                </label>
+            </div>
+        </div>
+        <!-- Вопрос 10 -->
+        <div class="question-card" id="question10">
+            <div class="question-text">
+                10. Кто одержит победу во втором полуфинале?
+                <span class="points"> 4 баллов</span>
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q10" value="team1">
+                    <img src="1PunchPok783.jpg">
+                    <span class="label">1PunchPok783</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q10" value="team2">
+                    <img src="MLYARI.jpg">
+                    <span class="label">MLYARI</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q10" value="team3">
+                    <img src="Resistance.jpg">
+                    <span class="label">Resistance</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="q10" value="team4">
+                    <img src="BA3UJlUHYCbl.jpg">
+                    <span class="label">BA3UJlUHYCbl</span>
+                </label>
+            </div>
+        </div>
+        <button class="submit-btn" onclick="checkAnswers()">ОТПРАВИТЬ ПРОГНОЗЫ</button>
+    </div>
+    <script>
+        function checkAnswers() {
+            // Массив с вопросами
+            const questions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10'];
+            let unanswered = [];
+            
+            // Проверяем каждый вопрос
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (!selected) {
+                    unanswered.push(index + 1); // запоминаем номер вопроса
+                }
+            });
+            
+            // Если есть неотвеченные вопросы
+            if (unanswered.length > 0) {
+                // Убираем подсветку со всех вопросов
+                document.querySelectorAll('.question-card').forEach(card => {
+                    card.classList.remove('highlight');
+                });
+                
+                // Подсвечиваем первый неотвеченный вопрос
+                const firstUnanswered = document.getElementById(`question${unanswered[0]}`);
+                firstUnanswered.classList.add('highlight');
+                
+                // Плавно скроллим к нему
+                firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Через 3 секунды убираем подсветку
+                setTimeout(() => {
+                    firstUnanswered.classList.remove('highlight');
+                }, 3000);
+                
+            } else {
+                // Все вопросы отвечены - отправляем
+                errorMsg.style.display = 'none';
+                errorMsg.style.background = 'rgba(0, 255, 136, 0.2)';
+                errorMsg.style.borderColor = '#00ff88';
+                errorMsg.style.color = '#00ff88';
+                errorMsg.innerHTML = '✅ Все вопросы отвечены! Прогнозы отправлены!';
+                errorMsg.style.display = 'block';
+                
+                // Собираем ответы
+                const answers = {};
+                questions.forEach(q => {
+                    const selected = document.querySelector(`input[name="${q}"]:checked`);
+                    answers[q] = selected ? selected.parentElement.querySelector('.option-text').innerText : null;
+                });
+                
+                console.log('Ответы пользователя:', answers);
+                
+                // Через 2 секунды скрываем сообщение
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                    errorMsg.style.background = 'rgba(255, 71, 87, 0.2)';
+                    errorMsg.style.borderColor = '#ff4757';
+                    errorMsg.style.color = '#ff4757';
+                }, 3000);
+            }
+        }
+        
+        // Автоматически убираем подсветку, когда пользователь отвечает на вопрос
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Находим родительский вопрос
+                const questionCard = this.closest('.question-card');
+                // Убираем подсветку
+                questionCard.classList.remove('highlight');
+                // Скрываем сообщение об ошибке
+                document.getElementById('errorMessage').style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>

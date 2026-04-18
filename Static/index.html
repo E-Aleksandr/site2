@@ -2,389 +2,309 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Прогнозы</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Тест входа через Telegram</title>
     <style>
-        label {
-            font-family: Arial, sans-serif;
-            display: flex;
-            margin-bottom: 5px;
-            align-items: center;
-            color:#b8c7d9;
-            user-select: none;
-        }
-        input:checked ~ .label {
-            color: #00ff88;
-            font-weight: bold;
+        * {
+            box-sizing: border-box;
         }
         body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f0fe 0%, #d4e4fc 100%);
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a0a2a, #003366, #0a0a2a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
         }
-        img {
-            margin-right: 5px;
-            vertical-align: middle;
-            width: 25px;
-            height: 25px;
-            object-fit: cover;
-        }
-        .points {
-            color: #ffd700;
-            font-size: 15px;
-            font-weight: lighter;
-            margin-left: 20px;
-            user-select: none;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        .submit-btn {
-            background: linear-gradient(135deg, #00d4ff, #0099cc);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
+        .card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 500px;
             width: 100%;
-            transition: all 0.3s;
-            margin-top: 20px;
-            user-select: none;
+            padding: 30px 24px 40px;
+            transition: all 0.2s ease;
+            text-align: center;
         }
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #00e5ff, #00aadd);
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-        }
-        input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            margin-right: 12px;
-            cursor: pointer;
-            accent-color: #00ff88;
-        }
-        .option:hover {
-            background: rgba(0, 212, 255, 0.1);
-        }
-        .option {
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #1f2a3a;
             display: flex;
             align-items: center;
-            padding: 10px 15px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
+            justify-content: center;
             gap: 10px;
         }
-        .conditional-options {
-            margin-top: 10px;
-            border-left: 2px solid #00d4ff;
-            display: none;
-            padding: 15px;
-            margin-bottom: 15px;
+        .sub {
+            color: #5e6f8d;
+            margin-bottom: 32px;
+            font-size: 15px;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 16px;
         }
-        .conditional-options.show {
-            display: block;
+        .auth-box {
+            background: #f8fafd;
+            border-radius: 28px;
+            padding: 28px 20px;
+            margin-bottom: 32px;
+            border: 1px solid #e2e8f2;
         }
-        .question-text {
-            color: #e0f2fe;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            user-select: none;
-        }
-        .question-card.highlight {
-            border-color: #ff4757;
-            background: rgba(255, 71, 87, 0.1);
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);
-        }
-        .question-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
+        .info-box {
+            background: #f0f4f9;
+            border-radius: 24px;
             padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            text-align: left;
+            font-family: 'SF Mono', 'Menlo', monospace;
+            font-size: 14px;
+            border-left: 4px solid #2a9d8f;
+            margin-top: 20px;
+            word-break: break-word;
         }
-        .quiz-container {
-            max-width: 600px;
-            margin: 0 auto;
+        .info-box h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #1e2c3a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-row {
+            margin: 8px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+        .label {
+            font-weight: 600;
+            min-width: 95px;
+            color: #2c3e66;
+        }
+        .value {
+            color: #0f172a;
+            font-weight: 500;
+        }
+        .badge {
+            display: inline-block;
+            background: #2a9d8f20;
+            color: #1e6f5c;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        button {
+            background: #2a9d8f;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: 0.2s;
+            width: 100%;
+        }
+        button:hover {
+            background: #238276;
+            transform: scale(0.98);
+        }
+        .hidden {
+            display: none;
+        }
+        .telegram-login {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        footer {
+            font-size: 12px;
+            color: #7c8aa0;
+            margin-top: 24px;
+        }
+        hr {
+            margin: 20px 0;
+            border: none;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        @media (max-width: 500px) {
+            .card {
+                padding: 20px 16px 32px;
+            }
+            .info-row {
+                flex-direction: column;
+                gap: 2px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="quiz-container">
-        <h1 style="color: #ffffff; text-align: center; margin-bottom: 30px; user-select: none;" id="test" >
-            ПРОГНОЗЫ
-        </h1>
-        <!-- Вопрос 1 Условный впопрос -->
-        <div class="question-card" id="question1">
-            <div class="question-text">
-                1. Кто победит в первой встрече 1/4 финала?
-                <br>
-                <span class="points">Вопрос на 2 балла</span>
-            </div>
-            <div class="options">
-                <label class="option">
-                    <input type="radio" name="q1_winner" value="teamName1"> <!-- Название команды 1 -->
-                    <img src="t1.jpg">
-                    <span class="label">teamName1</span>
-                </label>
-                <label class="option">
-                    <input type="radio" name="q1_winner" value="teamName2"> <!-- Название команды 2 -->
-                    <img src="t2.jpg">
-                    <span class="label">teamName2</span>
-                </label>
-            </div>
-            <!-- Условные ответы для команды 1 -->
-            <div class="conditional-options" id="q1_teamName1"> <!-- q1_teamName1 -->
-                <div class="question-text">
-                    2. Укажите счёт (победа teamName1):
-                    <br>
-                    <span class="points">Вопрос на 6 балла</span>
-                </div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q1_score" value="3-0">
-                        <span class="label">3:0 в пользу "teamName1"</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1_score" value="3-1">
-                        <span class="label">3:1 в пользу "teamName1"</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1_score" value="3-2">
-                        <span class="label">3:2 в пользу "teamName1"</span>
-                    </label>
-                </div>
-            </div>
-            <!-- Условные ответы для команды 2 -->
-            <div class="conditional-options" id="q1_teamName2"> <!-- q1_teamName2 -->
-                <div class="question-text">
-                    2. Укажите счёт (победа teamName2):
-                    <br>
-                    <span class="points">Вопрос на 6 балла</span>
-                </div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q1_score" value="0-3">
-                        <span class="label">0:3 в пользу "teamName2"</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1_score" value="1-3">
-                        <span class="label">1:3 в пользу "teamName2"</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1_score" value="2-3">
-                        <span class="label">2:3 в пользу "teamName2"</span>
-                    </label>
-                </div>
-            </div>
+<div class="card" id="app">
+    <h1>
+        <span>📋</span> ТЕСТ Telegram Auth
+    </h1>
+    <div class="sub">Авторизуйтесь, чтобы увидеть свои данные</div>
+
+    <!-- Блок до авторизации -->
+    <div id="loginSection" class="auth-box">
+        <div style="margin-bottom: 16px;">🔐 Нажмите на кнопку входа</div>
+        <!-- Виджет логина будет вставлен сюда -->
+        <div id="telegramWidget" class="telegram-login"></div>
+        <div class="info-box" style="background:#fff3e0; border-left-color:#f4a261;">
+            ⚡ <strong>Тест-режим:</strong> После авторизации вы увидите свои Telegram ID, username и подпись.
         </div>
-        <!-- Вопрос 3 Условный вопрос -->
-        <div class="question-card" id="question3">
-            <div class="question-text">
-                3. Кто победит во второй встрече 1/4 финала?
-                <br>
-                <span class="points">Вопрос на 2 балла</span>
-            </div>
-            <div class="options">
-                <label class="option">
-                    <input type="radio" name="q3_winner" value="teamName3"> <!-- Название команды 3 -->
-                    <img src="t3.jpg">
-                    <span class="label">teamName3</span>
-                </label>
-                <label class="option">
-                    <input type="radio" name="q3_winner" value="teamName4"> <!-- Название команды 4 -->
-                    <img src="t4.jpg">
-                    <span class="label">teamName4</span>
-                </label>
-            </div>
-            <!-- Условные ответы для команды 1 -->
-            <div class="conditional-options" id="q3_teamName3"> <!-- q1_teamName3 -->
-                <div class="question-text">
-                    4. Укажите счёт (победа teamName3):
-                    <br>
-                    <span class="points">Вопрос на 6 балла</span>
-                </div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q3_score" value="3-0">
-                        <span class="label">3:0 в пользу "teamName3"</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3_score" value="3-1">
-                        <span class="label">3:1 в пользу "teamName3"</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3_score" value="3-2">
-                        <span class="label">3:2 в пользу "teamName3"</span>
-                    </label>
-                </div>
-            </div>
-            <!-- Условные ответы для команды 2 -->
-            <div class="conditional-options" id="q3_teamName4"> <!-- q1_teamName4 -->
-                <div class="question-text">
-                    4. Укажите счёт (победа teamName4):
-                    <br>
-                    <span class="points">Вопрос на 6 балла</span>
-                </div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q3_score" value="0-3">
-                        <span class="label">0:3 в пользу "teamName4"</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3_score" value="1-3">
-                        <span class="label">1:3 в пользу "teamName4"</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3_score" value="2-3">
-                        <span class="label">2:3 в пользу "teamName4"</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <!-- Вопрос 5 Обычный вопрос -->
-        <div class="question-card" id="question5">
-            <div class="question-text">
-                5. Кто победит в первом полуфинале?
-                <br>
-                <span class="points">Вопрос на 2 балла</span>
-            </div>
-            <div class="options">
-                <label class="option">
-                    <input type="radio" name="q5_winner" value="teamName1"> <!-- Название команды 1 -->
-                    <img src="t1.jpg">
-                    <span class="label">teamName1</span>
-                </label>
-                <label class="option">
-                    <input type="radio" name="q5_winner" value="teamName2"> <!-- Название команды 2 -->
-                    <img src="t2.jpg">
-                    <span class="label">teamName2</span>
-                </label>
-                <label class="option">
-                    <input type="radio" name="q5_winner" value="teamName3"> <!-- Название команды 3 -->
-                    <img src="t3.jpg">
-                    <span class="label">teamName3</span>
-                </label>
-                <label class="option">
-                    <input type="radio" name="q5_winner" value="teamName4"> <!-- Название команды 4 -->
-                    <img src="t4.jpg">
-                    <span class="label">teamName4</span>
-                </label>
-            </div>
-        </div>
-        <button class="submit-btn" onclick="checkAnswers()">ОТПРАВИТЬ ПРОГНОЗЫ</button>
     </div>
+
+    <!-- Блок после авторизации (скрыт) -->
+    <div id="userSection" class="hidden">
+        <div class="badge" id="greetingBadge">✅ Авторизован</div>
+        <div class="info-box">
+            <h3>👤 ДАННЫЕ ПОЛЬЗОВАТЕЛЯ</h3>
+            <div class="info-row">
+                <div class="label">🆔 User ID:</div>
+                <div class="value" id="userId">—</div>
+            </div>
+            <div class="info-row">
+                <div class="label">👤 Username:</div>
+                <div class="value" id="username">—</div>
+            </div>
+            <div class="info-row">
+                <div class="label">📛 First Name:</div>
+                <div class="value" id="firstName">—</div>
+            </div>
+            <div class="info-row">
+                <div class="label">🏷️ Last Name:</div>
+                <div class="value" id="lastName">—</div>
+            </div>
+            <div class="info-row">
+                <div class="label">🕒 Auth Date:</div>
+                <div class="value" id="authDate">—</div>
+            </div>
+            <div class="info-row">
+                <div class="label">🔑 Hash (первые 12):</div>
+                <div class="value" id="hashPreview">—</div>
+            </div>
+        </div>
+        <button id="logoutBtn">🔄 Выйти / Тест заново</button>
+        <div class="info-box" style="margin-top: 16px; background:#eef2fa;">
+            💡 <strong>Что это даёт?</strong><br>
+            Эти данные ПОДЛИННЫЕ и подписаны Telegram. Вы можете использовать user_id и username для сохранения прогнозов — их невозможно подделать.
+        </div>
+    </div>
+    <footer>
+        Telegram Login Widget • Ваши данные не покидают ваш браузер (только проверка)
+    </footer>
+</div>
+
+<script>
+    const BOT_USERNAME = "TKTTestGame_bot";
     
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const username = urlParams.get('username');
-        const userId = urlParams.get('user_id');
+    // Настоящий URL вашего сайта (можно оставить текущий для теста)
+    // Для теста локально можно использовать window.location.origin
+    const AUTH_URL = "https://site2-production-29a1.up.railway.app"; 
+    // ⚠️ ВНИМАНИЕ: для полноценной работы нужен HTTPS и домен. 
+    // Для локального теста виджет не сработает без HTTPS/валидного домена.
+    // Для теста можно использовать просто data-onauth (см. ниже запасной вариант).
+    
+    let mounted = false;
+    
+    function renderLoginWidget() {
+        const widgetContainer = document.getElementById("telegramWidget");
+        if (!widgetContainer) return;
+        widgetContainer.innerHTML = ""; // очищаем
         
-        document.getElementById('test').innerHTML = `
-        <h1 style="color: #ffffff; text-align: center; margin-bottom: 30px; user-select: none;" id="test" >
-            ПРОГНОЗЫ 
-            username @${username}
-            id ${userId}
-        </h1>`;
-        function checkAnswers() {
-            const questions = ['q1_winner', 'q3_winner', 'q5_winner'];
-            let unanswered = [];
-            
-            questions.forEach((q, index) => {
-                const selected = document.querySelector(`input[name="${q}"]:checked`);
-                if (!selected) {
-                    const questionNum = parseInt(q.replace('q', ''));
-                    unanswered.push(questionNum);
-                }
-            });
-
-            const conditionalQuestions = [1, 3];
-            
-            conditionalQuestions.forEach(questionNum => {
-                const winner = document.querySelector(`input[name="q${questionNum}_winner"]:checked`);
-
-                if (winner) {
-                    const score = document.querySelector(`input[name="q${questionNum}_score"]:checked`);
-                    if (!score) {
-                        unanswered.push(questionNum);
-                    }
+        // Способ 1: динамическое создание скрипта (самый надёжный для теста)
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = "https://telegram.org/js/telegram-widget.js?22";
+        script.setAttribute('data-telegram-login', BOT_USERNAME);
+        script.setAttribute('data-size', "large");
+        script.setAttribute('data-radius', "20");
+        script.setAttribute('data-request-access', "write");
+        // Для теста без HTTPS/бекенда используем data-onauth (прямой колбэк)
+        script.setAttribute('data-onauth', "onTelegramAuth(user)");
+        script.setAttribute('data-auth-url', ""); // очищаем чтоб не редиректил
+        widgetContainer.appendChild(script);
+    }
+    
+    // Глобальный колбэк, который вызовет виджет при успешном входе
+    window.onTelegramAuth = function(user) {
+        console.log("Telegram авторизация успешна:", user);
+        // user содержит: id, first_name, last_name, username, photo_url, auth_date, hash
+        if (user && user.id) {
+            showUserData(user);
+        } else {
+            alert("Ошибка: не удалось получить данные пользователя");
+        }
+    };
+    
+    function showUserData(user) {
+        // Заполняем блок пользователя
+        document.getElementById("userId").innerText = user.id;
+        document.getElementById("username").innerText = user.username || "(не указан)";
+        document.getElementById("firstName").innerText = user.first_name || "—";
+        document.getElementById("lastName").innerText = user.last_name || "—";
+        const authDateStr = user.auth_date ? new Date(user.auth_date * 1000).toLocaleString() : "—";
+        document.getElementById("authDate").innerText = authDateStr;
+        const hashShort = user.hash ? user.hash.substring(0, 12) + "..." : "—";
+        document.getElementById("hashPreview").innerText = hashShort;
+        
+        // Скрываем блок логина, показываем данные
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("userSection").classList.remove("hidden");
+        
+        // Сохраняем пользователя в sessionStorage для "выхода"
+        sessionStorage.setItem("telegram_user", JSON.stringify(user));
+    }
+    
+    function logout() {
+        sessionStorage.removeItem("telegram_user");
+        document.getElementById("loginSection").classList.remove("hidden");
+        document.getElementById("userSection").classList.add("hidden");
+        // Пересоздаём виджет (чтобы кнопка снова была активна)
+        renderLoginWidget();
+    }
+    
+    // Проверяем, был ли уже вход (при перезагрузке)
+    function checkSavedSession() {
+        const saved = sessionStorage.getItem("telegram_user");
+        if (saved) {
+            try {
+                const user = JSON.parse(saved);
+                if (user && user.id) {
+                    showUserData(user);
                 } else {
-                    unanswered.push(questionNum);
+                    logout();
                 }
-            });
-            
-            if (unanswered.length > 0) {
-                document.querySelectorAll('.question-card').forEach(card => {
-                    card.classList.remove('highlight');
-                });
-                
-                const firstUnanswered = document.getElementById(`question${unanswered[0]}`);
-                firstUnanswered.classList.add('highlight');
-                
-                firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
-                setTimeout(() => {
-                    firstUnanswered.classList.remove('highlight');
-                }, 3000);
-                
-            } else {
-                // Собираем ответы
+            } catch(e) {
+                logout();
             }
+        } else {
+            // нет сессии — показываем виджет
+            renderLoginWidget();
         }
-
-        function setupConditionalQuestion(questionNumber, winnerName1, winnerName2) {
-            const winnerRadios = document.querySelectorAll(`input[name="q${questionNumber}_winner"]`);
-            const block1 = document.getElementById(`q${questionNumber}_${winnerName1}`);
-            const block2 = document.getElementById(`q${questionNumber}_${winnerName2}`);
+    }
     
-            function update() {
-                const selected = document.querySelector(`input[name="q${questionNumber}_winner"]:checked`);
-        
-                if (block1) block1.classList.remove('show');
-                if (block2) block2.classList.remove('show');
-        
-                const scoreRadios = document.querySelectorAll(`input[name="q${questionNumber}_score"]`);
-                scoreRadios.forEach(radio => {
-                    radio.checked = false;
-                });
-        
-                const questionCard = document.getElementById(`question${questionNumber}`);
-                if (questionCard) questionCard.classList.remove('highlight');
-        
-                if (selected) {
-                    if (selected.value === winnerName1 && block1) {
-                        block1.classList.add('show');
-                    } else if (selected.value === winnerName2 && block2) {
-                        block2.classList.add('show');
-                    }
-                }
-            }
+    // Обработчик для кнопки выхода
+    document.addEventListener("DOMContentLoaded", () => {
+        checkSavedSession();
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) logoutBtn.addEventListener("click", logout);
+    });
     
-            winnerRadios.forEach(radio => radio.addEventListener('change', update));
-            update();
+    // если по какой-то причине скрипт виджета загрузился и не вызвал колбэк — повторная инициализация
+    window.addEventListener("load", function() {
+        if (!document.getElementById("telegramWidget")?.hasChildNodes() && !sessionStorage.getItem("telegram_user")) {
+            renderLoginWidget();
         }
-
-        setupConditionalQuestion(1, 'teamName1', 'teamName2'); // Добавляем команды в условный вопрос
-        setupConditionalQuestion(3, 'teamName3', 'teamName4'); // Добавляем команды в условный вопрос
-
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const questionCard = this.closest('.question-card');
-                if (questionCard) questionCard.classList.remove('highlight');
-            });
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
